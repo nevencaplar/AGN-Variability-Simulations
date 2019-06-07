@@ -1,0 +1,17 @@
+# connect to tigergpu
+ssh ncaplar@tigergpu.princeton.edu
+
+# on gpu
+#module load anaconda/5.2.0 
+#source activate cuda_env
+module load openmpi
+cd CodeGpu/
+
+# this really allocates the time
+salloc --gres=gpu:1 -t 00:15:00
+
+# check the status
+gpustat
+
+# run
+sh run_script_ex.sh
