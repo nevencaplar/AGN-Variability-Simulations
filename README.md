@@ -62,16 +62,18 @@ Below all of the parameters that are available are described. The values below a
 	name="example_results"
 	repetitions=5
 
---
+---
+
 The name of the created files and the number of create light-curves.
 
 	LClength_in=24
 	tbin_in=8640000.
 
 
-LClength_in - length of the created light-curve, in the power of 2, lengh=2** LClength_in
-tbin_in = time duration of the created light curve
---
+- LClength_in - length of the created light-curve, in the power of 2, lengh=2** LClength_in
+- tbin_in = time duration of the created light curve
+
+---
 
 	A_in=30
 	v_bend_in=2.e-10
@@ -86,7 +88,9 @@ Parameters describing the broker power-law PSD of the light curve. The parameter
 - a_low_in: low frequency slope
 - a_high_in: high frequency slope
 - c_in: offset from zero
---
+
+---
+
 Parameters describing the limits of the PSD/PDF?.
 
 	num_it_in=200
@@ -100,7 +104,9 @@ Parameters describing the limits of the PSD/PDF?.
 - UpperLimit_in: upper limit
 - LowerLimit_acc_in: lower limit
 - UpperLimit_acc_in: upper limit
---
+
+---
+
 Parameters describing the broker power-law PDF of the light curve. The parameters are described with Equation 1 in the paper. 
 
 	delta1_BPL_in=0.47
@@ -110,7 +116,9 @@ Parameters describing the broker power-law PDF of the light curve. The parameter
 - delta1_BPL_in: low-Eddington ratio slope
 - delta2_BPL_in: high-Eddington ratio slope
 - lambda_s_BPL_in: break Eddington ratio where the power law bends
---
+
+---
+
 Parameters describing the normal (Gaussian) PDF of the light curve. The parameters are described with Equation 2 in the paper. 
 
 	lambda_s_LN_in=0.000562341
@@ -118,18 +126,29 @@ Parameters describing the normal (Gaussian) PDF of the light curve. The paramete
 
 - lambda_s_LN_in: mean of the normal distribution
 - sigma_LN_in: width of the normal distribution
---
+
+---
+
 Parameter which determines if you are using broken power-law or Gaussian description for the PDF. If you are using broken power-law, Gaussian parameters are ignored and vice-versa.
 
 	PDF_in=1
 
 - PDF_in: 1 for broken power and 2 for Gaussian?
---
 
-Parameter which determines
+---
+
+Parameter which determines ?
 
 	len_block_rd_in=1024
 
 -len_block_rd_in: ??
 
 ### Examples:
+
+Find 20 run with fiducial parameters (the ones in run_script_ex.sh) in the Examples folder. 
+To load the curves use
+
+	import numpy as np
+	ER_curve = np.zeros(num_points, dtype = float)
+	ER_curve = np.fromfile(<path_to_the_bin_file_here>, dtype = float)
+
