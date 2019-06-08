@@ -1,10 +1,9 @@
 # Simulating AGN variability
 
 #### GPU implementation of the light curve simulation algorithm
-##### As according to [Sartori et al 2019, submitted to APJ]
+##### As according to [Sartori, Trakhtenbrot, Schawinski, Caplar, Treister, Zhang 2019, submitted to APJ]
 
-The main purpose of this repository it to make available to the public the code explored in Sartori et al 2019. Refer to the main paper for detailed understanding of the implementation and physical choices made.
-
+The main purpose of this repository it to make available to the public the code explored in Sartori et al., 2019. Refer to the main paper for detailed understanding of the implementation and physical choices made.
 
 ### Installation:
 
@@ -62,6 +61,9 @@ Below all of the parameters that are available are described. The values below a
 	name="example_results"
 	repetitions=5
 
+- name: name of the resulting files
+- repetitions: number of light curves created
+
 ---
 
 The name of the created files and the number of create light-curves.
@@ -70,18 +72,17 @@ The name of the created files and the number of create light-curves.
 	tbin_in=8640000.
 
 
-- LClength_in - length of the created light-curve, in the power of 2, lengh=2** LClength_in
-- tbin_in = time duration of the created light curve
+- LClength_in: length of the created light-curve, as the exponent to the power of 2, lengh=2** LClength_in
+- tbin_in: time duration of the created light curve
 
 ---
+Parameters describing the broker power-law PSD of the light curve. The parameters are described with Equation 3 in the paper. 
 
 	A_in=30
 	v_bend_in=2.e-10
 	a_low_in=1.0
 	a_high_in=2.0
 	c_in=0.0
-
-Parameters describing the broker power-law PSD of the light curve. The parameters are described with Equation 3 in the paper. 
 
 - A_in: normalization
 - v_bend_in: frequency of the bend of the power-law
