@@ -143,7 +143,7 @@ Parameter which determines number of blocks used for the random draw part
 
 	len_block_rd_in=1024
 
--len_block_rd_in: We recommend not changing this number?
+- len_block_rd_in: We recommend not changing this number?
 
 ### Examples:
 
