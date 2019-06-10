@@ -92,23 +92,15 @@ Parameters describing the broker power-law PSD of the light curve. The parameter
 
 ---
 
-Parameters describing the limits of the PSD/PDF?.
+Parameter which determines if you are using broken power-law or Gaussian description for the PDF. If you are using broken power-law, Gaussian parameters are ignored and vice-versa.
 
-	num_it_in=200
-	LowerLimit_in=0.00001
-	UpperLimit_in=10.
-	LowerLimit_acc_in=0.001
-	UpperLimit_acc_in=3.
+	PDF_in=1
 
-- num_it_in: ?
-- LowerLimit_in: lower limit
-- UpperLimit_in: upper limit
-- LowerLimit_acc_in: lower limit
-- UpperLimit_acc_in: upper limit
+- PDF_in: 1 for broken power-law PDF and 0 for Gaussian PDF
 
 ---
 
-Parameters describing the broker power-law PDF of the light curve. The parameters are described with Equation 1 in the paper. 
+Parameters describing the broker power-law PDF for creation of the light curves. The parameters are described with Equation 1 in the paper. 
 
 	delta1_BPL_in=0.47
 	delta2_BPL_in=2.53
@@ -120,7 +112,7 @@ Parameters describing the broker power-law PDF of the light curve. The parameter
 
 ---
 
-Parameters describing the normal (Gaussian) PDF of the light curve. The parameters are described with Equation 2 in the paper. 
+Parameters describing the Gaussian (normal) PDF for creation of the light curves The parameters are described with Equation 2 in the paper. 
 
 	lambda_s_LN_in=0.000562341
 	sigma_LN_in=0.64
@@ -130,19 +122,27 @@ Parameters describing the normal (Gaussian) PDF of the light curve. The paramete
 
 ---
 
-Parameter which determines if you are using broken power-law or Gaussian description for the PDF. If you are using broken power-law, Gaussian parameters are ignored and vice-versa.
+Parameters describing the limits of the Eddington ratio distribution (PDF). Due to numerical constraints in the Random draw algorithm, there are two extra parameters, beyond the lower and upper limit of the distribution, that need to be fixed.
 
-	PDF_in=1
+	num_it_in=200
+	LowerLimit_in=0.00001
+	UpperLimit_in=10.
+	LowerLimit_acc_in=0.001
+	UpperLimit_acc_in=3.
 
-- PDF_in: 1 for broken power and 2 for Gaussian?
+- num_it_in: number of iterative steps, described in Section 3.2.2
+- LowerLimit_in: lower limit of the Eddington ratio distribution (PDF) for the random draw algorithm - has to be larger than LowerLimit_acc_in for broken-power law ERDF, and same as UpperLimit_acc_in for Gaussian case!
+- UpperLimit_in: upper limit of the Eddington ratio distribution (PDF) for the random draw algorithm - has to be larger than UpperLimit_acc_in for broken-power law ERDF, and same as UpperLimit_acc_in for Gaussian case!
+- LowerLimit_acc_in: lower limit of the Eddington ratio distribution (PDF)
+- UpperLimit_acc_in: upper limit of the Eddington ratio distribution (PDF)
 
 ---
 
-Parameter which determines ?
+Parameter which determines number of blocks used for the random draw part
 
 	len_block_rd_in=1024
 
--len_block_rd_in: ??
+-len_block_rd_in: We recommend not changing this number?
 
 ### Examples:
 
