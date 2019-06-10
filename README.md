@@ -25,23 +25,24 @@ Follow the instructions to install lwgrp and dtcmp. For example, to install thes
 	make
 	make install
 
-Then in the home directory we run again run, after modifying Makefile 
+Modify Makefile to point to your /include and /lib directories. As you can see when examining Makefile in this repository, I put Random123 and tclap in the CodeGpu directory (-I/home/ncaplar/CodeGpu/software/Random123-1.09/include -I/home/ncaplar/CodeGpu/tclap/include), while we have just installed stomp and lwgrp in the subdirectory (-L/home/ncaplar/CodeGpu/software/lib). You must also provide path for your cuda and mpi implementation (i.e., the code needs to be able to find -lmpi -lcufft -lcuda -lcudart libraries). 
+
+After modifying Makefile, in the home directory of the reposition, run 
 
 	make
 	make install
 
-Modify Makefile to point to your /include and /lib directories. As you can see when examining Makefile, I put Random123 and tclap in the CodeGpu directory (-I/home/ncaplar/CodeGpu/software/Random123-1.09/include -I/home/ncaplar/CodeGpu/tclap/include), while we just installed stomp and lwgrp in the subdirectory (-L/home/ncaplar/CodeGpu/software/lib). You must also provide path for your cuda and mpi implementation (to -lmpi -lcufft -lcuda -lcudart libraries). 
 
-### Running:
+### Executing:
 
-Attached is also a script (run_script_ex.sh) which should make running the code easier. 
+Find attached a script (run_script_ex.sh) which should simplify running the code. 
 
-First, at the top of the file I had to add to the LD_LIBRARY_PATH the location of my mpi implementation and the the location for lwgrp/dtcm libraries. This might not be needed, but in in my case this looks like 
+First, at the top of the run_script_ex.sh file, I had to add to the LD_LIBRARY_PATH the location of my mpi implementation and the the location for lwgrp/dtcm libraries. This might not be needed in your case, but for me this looks like 
 
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/ncaplar/.conda/envs/cuda_env/lib
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/ncaplar/CodeGpu/software/lib
 
-After that request some GPUs time, e.g.,
+Now we are ready to create some light-curves! Request some GPUs time on your system, e.g.,
 
 	salloc --gres=gpu:1 -t 00:15:00
 
@@ -49,14 +50,14 @@ I like to use gpustat to verify the name of the machine that I have been given i
 
 	gpustat
 
-If you want to run on a machine with a different number change the parameter gpu_name in the run_script_ex script. And now we can finally
+If you want to run on a machine with a different number change the parameter gpu_name in the run_script_ex script! And now we can execute:
 
 	sh run_script_ex.sh
 
 
 ### Parameters:
 
-Below all of the parameters that are available are described. The values below are the ones that are set in the fiducial run_script_ex.sh script.
+Below all of the parameters that are available are described. The values specified below are the ones that are set in the fiducial run_script_ex.sh script. First we start with the names of the generated files
 
 	name="example_results"
 	repetitions=5
@@ -66,7 +67,7 @@ Below all of the parameters that are available are described. The values below a
 
 ---
 
-The name of the created files and the number of create light-curves.
+Parameters describing the size of the created light curve
 
 	LClength_in=24
 	tbin_in=8640000.
@@ -122,7 +123,7 @@ Parameters describing the Gaussian (normal) PDF for creation of the light curves
 
 ---
 
-Parameters describing the limits of the Eddington ratio distribution (PDF). Due to numerical constraints in the Random draw algorithm, there are two extra parameters, beyond the lower and upper limit of the distribution, that need to be fixed.
+Parameters describing the limits of the Eddington ratio distribution (PDF). Due to numerical constraints in the random draw algorithm, there are two extra parameters, beyond the lower and upper limit of the distribution, that need to be specified.
 
 	num_it_in=200
 	LowerLimit_in=0.00001
