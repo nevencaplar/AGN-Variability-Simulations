@@ -14,7 +14,7 @@ The code requires CUDA to run. In addition, the non-standard libraries (some of 
  - dtcmp (https://github.com/LLNL/dtcmp)
 
 
-After installing Random123 and tclap, follow the instructions on respective GitHub pages to install lwgrp and dtcmp. These are the packages that demand MPI. For example, to install these libraries in my home directory (/home/ncaplar/, in the CodeGpu/software subdirectory) I used:
+After installing Random123 and tclap, follow the instructions on respective GitHub pages to install lwgrp and dtcmp. These are the packages that demand MPI and dtcmp depends on lwgrp. For example, to install these libraries in my home directory (/home/ncaplar/, in the CodeGpu/software subdirectory) I used:
 
 	./configure --prefix='/home/ncaplar/CodeGpu/software/'
 	make 
