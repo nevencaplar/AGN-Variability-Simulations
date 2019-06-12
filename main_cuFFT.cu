@@ -708,7 +708,7 @@ int main(int argc, char **argv)
   printf ("Elapsed time: %f s\n", dt_ms/1000.0);
 
 
-  /* --- NEW CUDA: PRINT ------------------------------- */
+
   std::cout << "# --------------------------------------------------" << std::endl;
   std::cout << "# INPUT VALUES" << std::endl;  
   std::cout << "# --------------------------------------------------" << std::endl;
@@ -745,7 +745,7 @@ int main(int argc, char **argv)
 
 
 
-  /* --- NEW CUDA: RN ------------------------------- */
+
   // Timmer & Koenig (NOTE LIA: this is not the TK part, but a preparation for it...)
   double len_in = RedNoiseL * LClength;
   int pow_floor = floor(log2(len_in));
@@ -825,7 +825,7 @@ int main(int argc, char **argv)
 
   /*  --------------------------------------------------------------------------------------------*/
 
-  /* --- NEW CUDA: DEFINE PDF -------------------------------*/
+  /* ---  DEFINE PDF -------------------------------*/
 
   LogNormalDist lognormal(LowerLimit, UpperLimit,
          lambda_s_LN, sigma_LN);
@@ -841,7 +841,7 @@ int main(int argc, char **argv)
 
 
 
-  /* --- NEW CUDA: TIMMER KOENIG -------------------------------*/
+  /* ---  TIMMER KOENIG -------------------------------*/
 
   std::cout << ">> Get GPU properties..." << std::endl;  
 
@@ -986,7 +986,7 @@ int main(int argc, char **argv)
 
 
 
-  /* --- NEW CUDA: SORT SAMPLES  ------------------------------- */
+  /* ---  SORT SAMPLES  ------------------------------- */
 
   std::cout << ">> Sort samples" << std::endl;  
 
@@ -1018,7 +1018,7 @@ int main(int argc, char **argv)
   for(int j=0; j<num_it; j++){
 
 
-      /* --- NEW CUDA  ------------------------------- */
+      
 
       std::cout << "******* ITERATION " << j << " *******" << std::endl;
 
@@ -1031,7 +1031,7 @@ int main(int argc, char **argv)
       /* -------------------------------------------------------------------------------------------- */
 
 
-      /* --- NEW CUDA: FORWARD FFT  ------------------------------- */
+      /* ---  FORWARD FFT  ------------------------------- */
 
       std::cout << ">> iib - FFT" << std::endl;  
 
@@ -1057,7 +1057,7 @@ int main(int argc, char **argv)
       /* -------------------------------------------------------------------------------------------- */
 
 
-      /* --- NEW CUDA: SPECTRAL ADJ  ------------------------------- */
+      /* ---  SPECTRAL ADJ  ------------------------------- */
 
       std::cout << ">> iii - spectral adjustement" << std::endl;  
 
@@ -1097,7 +1097,7 @@ int main(int argc, char **argv)
       /* -------------------------------------------------------------------------------------------- */
 
 
-      /* --- NEW CUDA: SORT ------------------------------- */
+      /* ---  SORT ------------------------------- */
 
       std::cout << ">> iv - sort" << std::endl; 
 
@@ -1134,7 +1134,7 @@ int main(int argc, char **argv)
   }
 
 
-  /* --- NEW CUDA: SAVE RESULTS ------------------------------- */
+
 
   std::cout << ">> save results" << std::endl;  
 
@@ -1161,7 +1161,7 @@ int main(int argc, char **argv)
  
   --------------------------------------------------------------------------------------------*/
 
-  /* --- NEW CUDA: FREE AND DESTROY ------------------------------- */
+
 
   std::cout << "# --------------------------------------------------"<< std::endl;
   std::cout << "# FREE MEMORY" << std::endl;  
