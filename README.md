@@ -3,18 +3,18 @@
 #### GPU implementation of the light curve simulation algorithm
 ##### As according to [Sartori, Trakhtenbrot, Schawinski, Caplar, Treister, Zhang 2019, submitted to APJ]
 
-The main purpose of this repository it to make available to the public the code explored in Sartori et al., 2019. Refer to the main paper for detailed understanding of the implementation and physical choices made.
+The main purpose of this repository it to make available to the public the code explored in Sartori et al., 2019. Refer to the main paper for detailed understanding of the implementation and physical choices made. This is GPU implementation of the code described in [Emmanoulopoulos et al., 2013](https://ui.adsabs.harvard.edu/abs/2013MNRAS.433..907E/abstract). Implementation in pure Python is available [here](https://github.com/samconnolly/DELightcurveSimulation).
 
 ### Installation:
 
-The code requires CUDA (and MPI for extra libraries) to run. In addition, the non-standard libraries that need to be available are: 
+The code requires CUDA to run. In addition, the non-standard libraries (some of which require MPI) that need to be available are: 
  - Random123 (https://github.com/quinoacomputing/Random123)
  - tclap (https://github.com/eile/tclap)
  - lwgrp (https://github.com/LLNL/lwgrp)
  - dtcmp (https://github.com/LLNL/dtcmp)
 
 
-Follow the instructions to install lwgrp and dtcmp. These packages demand MPI. For example, to install these libraries in my home directory (/home/ncaplar/, in the CodeGpu/software subdirectory) I used:
+After installing Random123 and tclap, follow the instructions on respective GitHub pages to install lwgrp and dtcmp. These are the packages that demand MPI. For example, to install these libraries in my home directory (/home/ncaplar/, in the CodeGpu/software subdirectory) I used:
 
 	./configure --prefix='/home/ncaplar/CodeGpu/software/'
 	make 
@@ -25,9 +25,9 @@ Follow the instructions to install lwgrp and dtcmp. These packages demand MPI. F
 	make
 	make install
 
-Modify Makefile to point to your /include and /lib directories. As you can see when examining Makefile in this repository, I put Random123 and tclap in the CodeGpu directory (-I/home/ncaplar/CodeGpu/software/Random123-1.09/include -I/home/ncaplar/CodeGpu/tclap/include), while we have just installed stomp and lwgrp in the subdirectory (-L/home/ncaplar/CodeGpu/software/lib). You must also provide path for your cuda and mpi implementation (i.e., the code needs to be able to find -lmpi -lcufft -lcuda -lcudart libraries). 
+Modify Makefile to point to your /include and /lib directories. As you can see when examining Makefile in this repository, I put Random123 and tclap in the CodeGpu directory (-I/home/ncaplar/CodeGpu/software/Random123-1.09/include -I/home/ncaplar/CodeGpu/tclap/include), while we have just installed dtcmp and lwgrp in the software subdirectory (-L/home/ncaplar/CodeGpu/software/lib). You must also provide path for your cuda and mpi implementation (i.e., the code needs to be able to find -lmpi -lcufft -lcuda -lcudart libraries). 
 
-After modifying Makefile, in the home directory of the reposition, run 
+After modifying the provided Makefile (in the home directory of the repository) with the paths to your installations, run 
 
 	make
 
@@ -72,7 +72,7 @@ Parameters describing the size of the created light curve
 
 
 - LClength_in: length of the created light-curve, as the exponent to the power of 2, lengh=2** LClength_in
-- tbin_in: time duration of a single time step, i.e., the resolution of the light-curve. It is given in seconds. 
+- tbin_in: time duration of a single time step, i.e., the resolution of the light-curve. Nominally it is given in seconds. 
 
 ---
 Parameters describing the broker power-law PSD of the light curve. The parameters are described with Equation 3 in the paper. 
@@ -83,7 +83,7 @@ Parameters describing the broker power-law PSD of the light curve. The parameter
 	a_high_in=2.0
 	c_in=0.0
 
-- A_in: normalization, but note that the code creates light curves whose PSD shape is consistent with the input shape, but the normalization effectively depends on the PDF (see Equation A5)
+- A_in: dummy variable for normalization - note that the code creates light curves whose PSD shape is consistent with the input shape, but the normalization effectively depends on the PDF (see Equation A5)
 - v_bend_in: frequency of the bend of the power-law
 - a_low_in: low frequency slope
 - a_high_in: high frequency slope
@@ -116,7 +116,7 @@ Parameters describing the log-normal PDF for creation of the light curves The pa
 	lambda_s_LN_in=0.000562341
 	sigma_LN_in=0.64
 
-- lambda_s_LN_in: mean of the log-normal distribution. Note that this is linear value for the mean of the distribution, i.e., lamda_star=lambda_s_LN_in and not log(lamda_star)= lambda_s_LN_in.
+- lambda_s_LN_in: mean of the log-normal distribution. Note that this is linear value for the mean of the distribution, i.e., lamda^star=lambda_s_LN_in and not log(lamda^star)= lambda_s_LN_in.
 - sigma_LN_in: width of the log-normal distribution
 
 ---
@@ -141,7 +141,12 @@ Parameter which determines number of blocks used for the random draw part
 
 	len_block_rd_in=1024
 
-- len_block_rd_in: We recommend not changing this number?
+- len_block_rd_in: In general, we recommend not changing this number unless you know what you are doing. However, if you change this number it has to number that is a power of 2 (512, 1024, 2048...) and such that such that LC lenght /len_block_rd is smaller than the number of blocks in the GPU that you are using. Changing the number will change the performance of the code. In general, for the random draw step, we have to create 1 random seed per block (“parallel element”). This operation is quite expensive, both time-wise and memory-wise, so we want to reduce the number of blocks. On the other hand, having fewer blocks means that we have fewer parallel operations.
+So, one has to find the right balance between these two constrains, depending on the other properties of the generated light-curves. In the `run_script_ex.sh you can uncomment the following line, which will creates a profile file that is the “standard CUDA file” used for debugging and where you can look up how much time every step takes.
+
+	# Create unique profile file each run
+	#profFile=prof_${name}_${rep}.nvprof
+
 
 ### Examples:
 
