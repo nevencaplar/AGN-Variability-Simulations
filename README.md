@@ -1,7 +1,7 @@
 # Simulating AGN variability
 
 #### GPU implementation of the light curve simulation algorithm
-##### As according to [Sartori, Trakhtenbrot, Schawinski, Caplar, Treister, Zhang 2019, submitted to APJ]
+##### As according to [Sartori, Trakhtenbrot, Schawinski, Caplar, Treister, [Zhang](https://github.com/DS3Lab) 2019, submitted to APJ]
 
 The main purpose of this repository it to make available to the public the code explored in Sartori et al., 2019. Refer to the main paper for detailed understanding of the implementation and physical choices made. This is GPU implementation of the code described in [Emmanoulopoulos et al., 2013](https://ui.adsabs.harvard.edu/abs/2013MNRAS.433..907E/abstract). Implementation in pure Python is available [here](https://github.com/samconnolly/DELightcurveSimulation).
 
@@ -116,7 +116,7 @@ Parameters describing the log-normal PDF for creation of the light curves The pa
 	lambda_s_LN_in=0.000562341
 	sigma_LN_in=0.64
 
-- lambda_s_LN_in: mean of the log-normal distribution. Note that this is linear value for the mean of the distribution, i.e., lamda^star=lambda_s_LN_in and not log(lamda^star)= lambda_s_LN_in.
+- lambda_s_LN_in: mean of the log-normal distribution. Note that this is linear value for the mean of the distribution, i.e., lamda^star=lambda_s_LN_in and NOT log(lamda^star)= lambda_s_LN_in.
 - sigma_LN_in: width of the log-normal distribution
 
 ---
