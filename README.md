@@ -143,6 +143,7 @@ Parameter which determines number of blocks used for the random draw part
 
 - len_block_rd_in: In general, we recommend not changing this number unless you know what you are doing. However, if you change this number it has to number that is a power of 2 (512, 1024, 2048...) and such that such that LC lenght /len_block_rd is smaller than the number of blocks in the GPU that you are using. Changing the number will change the performance of the code. In general, for the random draw step, we have to create 1 random seed per block (“parallel element”). This operation is quite expensive, both time-wise and memory-wise, so we want to reduce the number of blocks. On the other hand, having fewer blocks means that we have fewer parallel operations.
 So, one has to find the right balance between these two constrains, depending on the other properties of the generated light-curves. 
+
 In the `run_script_ex.sh you can uncomment the following line, which will creates a profile file that is the “standard CUDA file” used for debugging and where you can look up how much time every step takes.
 
 	Create unique profile file each run
