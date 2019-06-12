@@ -150,7 +150,7 @@ In the `run_script_ex.sh you can uncomment the following line, which will create
 	#profFile=prof_${name}_${rep}.nvprof
 
 
-### Examples:
+### Loading the data and examples:
 
 Find 20 run with fiducial parameters (the ones in run_script_ex.sh) in the Examples folder. 
 To load the curves use
