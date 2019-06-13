@@ -3,18 +3,25 @@
 #### GPU implementation of the light curve simulation algorithm
 ##### As according to [Sartori, Trakhtenbrot, [Schawinski](https://github.com/kevinschawinski), [Caplar](https://github.com/nevencaplar), Treister, [Zhang](https://github.com/DS3Lab) 2019, submitted to APJ]
 
-The main purpose of this repository it to make available to the public the code explored in Sartori et al., 2019. Refer to the main paper for detailed understanding of the implementation and physical choices made. This is GPU implementation of the code described in [Emmanoulopoulos et al., 2013](https://ui.adsabs.harvard.edu/abs/2013MNRAS.433..907E/abstract). Implementation in pure Python is available [here](https://github.com/samconnolly/DELightcurveSimulation).
+The main purpose of this repository it to make available to the public the code explored in Sartori et al., 2019. Refer to the main paper for the detailed understanding of the implementation and the physical choices made. This is GPU implementation of the code described in [Emmanoulopoulos et al., 2013](https://ui.adsabs.harvard.edu/abs/2013MNRAS.433..907E/abstract). Implementation in pure Python is available [here](https://github.com/samconnolly/DELightcurveSimulation).
 
+1. [ Installation ](#inst)
+2. [ Executing ](#exec)
+3. [ Usage and parameters ](#usage)
+4. [ Loading the data and examples](#load)
+5. [ Help](#help)
+
+<a name="inst"></a>
 ### Installation:
 
-The code requires CUDA to run. In addition, the non-standard libraries (some of which require MPI) that need to be available are: 
+The code requires CUDA to run. In addition, the non-standard libraries that need to be available (some of which require MPI) are: 
  - Random123 (https://github.com/quinoacomputing/Random123)
  - tclap (https://github.com/eile/tclap)
  - lwgrp (https://github.com/LLNL/lwgrp)
  - dtcmp (https://github.com/LLNL/dtcmp)
 
 
-After installing Random123 and tclap, follow the instructions on respective GitHub pages to install lwgrp and dtcmp. These are the packages that demand MPI and dtcmp depends on lwgrp. For example, to install these libraries in my home directory (/home/ncaplar/, in the CodeGpu/software subdirectory) I used:
+follow the instructions on respective GitHub pages to install these libraries. I did not have issues with Random123 and tclap, but lwgrp and dtcmp are a bit trickier. These are the packages that demand MPI and dtcmp depends on lwgrp. For example, to install these libraries in my home directory (/home/ncaplar/, in the CodeGpu/software subdirectory) I used:
 
 	./configure --prefix='/home/ncaplar/CodeGpu/software/'
 	make 
@@ -31,6 +38,7 @@ After modifying the provided Makefile (in the home directory of the repository) 
 
 	make
 
+<a name="exec"></a>
 ### Executing:
 
 Find attached a script (run_script_ex.sh) which should simplify running the code. 
@@ -52,8 +60,8 @@ If you want to run on a machine with a different number change the parameter gpu
 
 	sh run_script_ex.sh
 
-
-### Parameters:
+<a name="usage"></a>
+### Usage and parameters:
 
 Below all of the parameters that are available are described. The values specified below are the ones that are set in the fiducial run_script_ex.sh script. First we start with the names of the generated files
 
@@ -71,10 +79,11 @@ Parameters describing the size of the created light curve
 	tbin_in=8640000.
 
 
-- LClength_in: length of the created light-curve, as the exponent to the power of 2, lengh=2** LClength_in
+- LClength_in: length of the created light-curve, as the exponent to the power of 2, lengh=2**LClength_in
 - tbin_in: time duration of a single time step, i.e., the resolution of the light-curve. Nominally it is given in seconds. 
 
 ---
+
 Parameters describing the broker power-law PSD of the light curve. The parameters are described with Equation 3 in the paper. 
 
 	A_in=30
@@ -83,7 +92,7 @@ Parameters describing the broker power-law PSD of the light curve. The parameter
 	a_high_in=2.0
 	c_in=0.0
 
-- A_in: dummy variable for normalization - note that the code creates light curves whose PSD shape is consistent with the input shape, but the normalization effectively depends on the PDF (see Equation A5)
+- A_in: dummy variable for normalization - note that the code creates light curves whose PSD shape is consistent with the input shape, but the normalization effectively depends on the PDF (see Equation A5 in the paper)
 - v_bend_in: frequency of the bend of the power-law
 - a_low_in: low frequency slope
 - a_high_in: high frequency slope
@@ -144,12 +153,12 @@ Parameter which determines number of blocks used for the random draw part
 - len_block_rd_in: In general, we recommend not changing this number unless you know what you are doing. However, if you change this number it has to number that is a power of 2 (512, 1024, 2048...) and such that such that LC lenght /len_block_rd is smaller than the number of blocks in the GPU that you are using. Changing the number will change the performance of the code. In general, for the random draw step, we have to create 1 random seed per block (“parallel element”). This operation is quite expensive, both time-wise and memory-wise, so we want to reduce the number of blocks. On the other hand, having fewer blocks means that we have fewer parallel operations.
 So, one has to find the right balance between these two constrains, depending on the other properties of the generated light-curves. 
 
-In the `run_script_ex.sh you can uncomment the following line, which will create a profile file that is the “standard CUDA file” used for debugging and where you can look up how much time every step takes.
+In the `run_script_ex.sh you can uncomment the following line, which will create a profile file that is the ``standard CUDA file'' used for debugging and where you can look up how much time every step takes.
 
 	#Create unique profile file each run
 	#profFile=prof_${name}_${rep}.nvprof
 
-
+<a name="load"></a>
 ### Loading the data and examples:
 
 Find 20 run with fiducial parameters (the ones in run_script_ex.sh) in the Examples folder. 
@@ -158,4 +167,9 @@ To load the curves use
 	import numpy as np
 	ER_curve = np.zeros(num_points, dtype = float)
 	ER_curve = np.fromfile(<path_to_the_bin_file_here>, dtype = float)
+
+<a name="help"></a>
+### Help:
+
+For problems with using the code or installation use GitHub issues page or send us an [email](mailto:ncaplar@princeton.edu). In particular, if you have a reasonable request to test the results with a specific choice of parameters without installing the code, it will usually be possible for us to run the code and place the results in the Example folder.
 
