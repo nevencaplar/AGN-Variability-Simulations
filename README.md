@@ -5,6 +5,8 @@
 
 The main purpose of this repository it to make available to the public the code explored in Sartori et al., 2019. Refer to the main paper for the detailed understanding of the implementation and the physical choices made. This is GPU implementation of the code described in [Emmanoulopoulos et al., 2013](https://ui.adsabs.harvard.edu/abs/2013MNRAS.433..907E/abstract). Implementation in pure Python is available [here](https://github.com/samconnolly/DELightcurveSimulation).
 
+
+## Table of contents:
 1. [ Installation ](#inst)
 2. [ Executing ](#exec)
 3. [ Usage and parameters ](#usage)
@@ -12,7 +14,7 @@ The main purpose of this repository it to make available to the public the code 
 5. [ Help](#help)
 
 <a name="inst"></a>
-### Installation:
+## Installation:
 
 The code requires CUDA to run. In addition, the non-standard libraries that need to be available (some of which require MPI) are: 
  - Random123 (https://github.com/quinoacomputing/Random123)
@@ -39,7 +41,7 @@ After modifying the provided Makefile (in the home directory of the repository) 
 	make
 
 <a name="exec"></a>
-### Executing:
+## Executing:
 
 Find attached a script (run_script_ex.sh) which should simplify running the code. 
 
@@ -61,7 +63,7 @@ If you want to run on a machine with a different number change the parameter gpu
 	sh run_script_ex.sh
 
 <a name="usage"></a>
-### Usage and parameters:
+## Usage and parameters:
 
 Below all of the parameters that are available are described. The values specified below are the ones that are set in the fiducial run_script_ex.sh script. First we start with the names of the generated files
 
@@ -159,7 +161,7 @@ In the `run_script_ex.sh you can uncomment the following line, which will create
 	#profFile=prof_${name}_${rep}.nvprof
 
 <a name="load"></a>
-### Loading the data and examples:
+## Loading the data and examples:
 
 Find 20 run with fiducial parameters (the ones in run_script_ex.sh) in the Examples folder. 
 To load the curves use
@@ -169,7 +171,7 @@ To load the curves use
 	ER_curve = np.fromfile(<path_to_the_bin_file_here>, dtype = float)
 
 <a name="help"></a>
-### Help:
+## Help:
 
 For problems with using the code or installation use GitHub issues page or send us an [email](mailto:ncaplar@princeton.edu). In particular, if you have a reasonable request to test the results with a specific choice of parameters without installing the code, it will usually be possible for us to run the code and place the results in the Example folder.
 
