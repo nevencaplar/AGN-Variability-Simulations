@@ -85,7 +85,7 @@ Parameters describing the size of the created light curve
 - tbin_in: time duration of a single time step, i.e., the resolution of the light-curve. Units are, in principle, free as long as units of v_bend_in are inverse. In our work we used units of seconds.  
 
 
-![image]https://www.dropbox.com/s/w76chfou986227y/Time_LC.png?raw=1
+![Time needed to generate a single curve](https://www.dropbox.com/s/w76chfou986227y/Time_LC.png?raw=1)
 
 ---
 
@@ -103,7 +103,7 @@ Parameters describing the broker power-law PSD of the light curve. The parameter
 - a_high_in: high frequency slope
 - c_in: offset from zero
 
-![image]https://www.dropbox.com/s/e5t9dcfwpjcg3ck/PDF.png?raw=1
+![PDF example](https://www.dropbox.com/s/e5t9dcfwpjcg3ck/PDF.png?raw=1)
 
 ---
 
@@ -125,7 +125,7 @@ Parameters describing the broker power-law PDF for creation of the light curves.
 - delta2_BPL_in: high-Eddington ratio slope
 - lambda_s_BPL_in: break Eddington ratio where the power law bends
 
-![image]https://www.dropbox.com/s/0k5c7rb65m29jd7/PSD.png
+![PSD example](https://www.dropbox.com/s/0k5c7rb65m29jd7/PSD.png)
 
 
 ---
