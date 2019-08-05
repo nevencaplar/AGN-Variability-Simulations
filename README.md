@@ -125,7 +125,7 @@ Parameters describing the broker power-law PDF for creation of the light curves.
 - delta2_BPL_in: high-Eddington ratio slope
 - lambda_s_BPL_in: break Eddington ratio where the power law bends
 
-![PSD example](https://www.dropbox.com/s/0k5c7rb65m29jd7/PSD.png)
+![PSD example](https://www.dropbox.com/s/0k5c7rb65m29jd7/PSD.png?raw=1)
 
 
 ---
