@@ -130,7 +130,7 @@ Parameters describing the broker power-law PDF for creation of the light curves.
 
 ---
 
-Parameters describing the log-normal PDF for creation of the light curves The parameters are described with Equation 2 in the paper. 
+Parameters describing the log-normal PDF for creation of the light curves. The parameters are described with Equation 2 in the paper. 
 
 	lambda_s_LN_in=0.000562341
 	sigma_LN_in=0.64
