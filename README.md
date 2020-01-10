@@ -112,7 +112,7 @@ Find below the comparison between the input (orange) and generated PSD (blue).
 
 ---
 
-Parameter which determines if you are using broken power-law or log-normal description for the PDF. If you are using broken power-law, log-normal parameters are ignored and vice-versa. NOTE that you have to modify relationship between Limit_in and Limit_acc_in parameters, depending on which function you are using here, as described below.
+Parameter which determines if you are using broken power-law or log-normal description for the PDF. If you are using broken power-law, log-normal parameters are ignored and vice-versa. NOTE that you have to modify relationship between Limit_in and Limit_acc_in parameters, depending on which function you are using here, as described further below.
 
 	PDF_in=1
 
