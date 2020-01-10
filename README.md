@@ -1,7 +1,7 @@
 # Simulating AGN variability
 
 #### GPU implementation of the light curve simulation algorithm
-##### As according to [[Sartori](https://people.phys.ethz.ch/~lias/), [Trakhtenbrot](http://wise-obs.tau.ac.il/~trakht/), [Schawinski](http://www.modulos.ai/kevin-schawinski), [Caplar](http://www.ncaplar.com), [Treister](http://kiaa.pku.edu.cn/visitor/ezequiel-treister), [Zhang](https://github.com/DS3Lab) 2019, accepted to APJ]
+##### As according to [[Sartori](https://people.phys.ethz.ch/~lias/), [Trakhtenbrot](http://wise-obs.tau.ac.il/~trakht/), [Schawinski](http://www.modulos.ai/kevin-schawinski), [Caplar](http://www.ncaplar.com), [Treister](http://kiaa.pku.edu.cn/visitor/ezequiel-treister), [Zhang](https://github.com/DS3Lab) 2019, [available here](https://ui.adsabs.harvard.edu/abs/2019ApJ...883..139S/abstract)]
 
 The main purpose of this repository it to make available to the public the code explored in Sartori et al., 2019. Refer to the main paper for the detailed understanding of the implementation and the physical choices made. This is GPU implementation of the code described in [Emmanoulopoulos et al., 2013](https://ui.adsabs.harvard.edu/abs/2013MNRAS.433..907E/abstract). Implementation in pure Python is available [here](https://github.com/samconnolly/DELightcurveSimulation).
 
@@ -98,7 +98,7 @@ Parameters describing the broker power-law PSD of the light curve. The parameter
 	a_high_in=2.0
 	c_in=0.0
 
-- A_in: dummy variable for normalization - note that the code creates light curves whose PSD shape is consistent with the input shape, but the normalization effectively depends on the PDF (see Equation A5 in the paper)
+- A_in: dummy variable for normalization - note that the code creates light curves whose PSD shape is consistent with the input shape, but the normalization effectively depends on the PDF (see Equation A5 in ArXiv version of the paper, Equation 13 in the ApJ version)
 - v_bend_in: frequency of the bend of the power-law. In our work we used units of Hz.  
 - a_low_in: low frequency slope
 - a_high_in: high frequency slope
@@ -112,7 +112,7 @@ Find below the comparison between the input (orange) and generated PSD (blue).
 
 ---
 
-Parameter which determines if you are using broken power-law or log-normal description for the PDF. If you are using broken power-law, log-normal parameters are ignored and vice-versa.
+Parameter which determines if you are using broken power-law or log-normal description for the PDF. If you are using broken power-law, log-normal parameters are ignored and vice-versa. NOTE that you have to modify relationship between Limit_in and Limit_acc_in parameters, depending on which function you are using here, as described below.
 
 	PDF_in=1
 
